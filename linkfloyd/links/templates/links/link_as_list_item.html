@@ -1,9 +1,7 @@
 {% load i18n qhonuskan_votes thumbnail gravatar channel_tags %}
-<div class="post{% ifequal highlight link.id %} highlight{% endifequal %}" id="{{link.id}}">
-	<div class="side">
-		{% vote_buttons_for link %}
-	</div>
-    <div class="content">
+<div class="post row-fluid{% ifequal highlight link.id %} highlighted{% endifequal %}" id="{{link.id}}">
+	{% vote_buttons_for link "vote_buttons.html" %}
+    <div class="content span11 pull-right">
         <p class="info">
             <a class="posted_by" href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> &rarr; <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>: <span class="date">{{link.posted_at|date:"d/m/Y"}}</span>
         {% if link.body %}<p class="body">{{link.body}}</p>{% endif %}

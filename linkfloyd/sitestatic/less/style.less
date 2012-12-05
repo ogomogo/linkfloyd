@@ -1,0 +1,71 @@
+@import '../bootstrap/less/bootstrap.less';
+@import '../bootstrap/less/responsive.less';
+
+.wrapper {
+    background: lighten(@cello, 10%);
+    max-width: 960px;
+    padding: 10px;
+    .border-radius(5px);
+    .center-block()
+}
+
+a {
+}
+.section {
+    background: #f3f3f3;
+    padding: 20px;
+    margin: 0 0 10px 0;
+    .border-radius(5px);
+    .nav-tabs {
+        background: #eee;
+        li.active a {
+            background: #fff;
+        }
+    }
+}
+
+.post {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    .info, .actions {
+        font-size: 13px;
+        line-height: 15px;
+    }
+    p.body {
+        color: @black;
+    }
+    .actions {
+        a {
+            margin-right: 10px;
+        }
+    }
+    .attachment {
+        padding: 0;
+        &.thumbnailed {
+            padding-top: 150px;
+        }
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        background-position: center center;
+        .border-radius(5px);
+        .cover {
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            overflow: auto;
+            a {
+                font-weight: bold;
+                font-size: 13px;
+                text-decoration: underline;
+                display: block;
+                color: lighten(@cello, 40%);
+            }
+            p {
+                font-size: 12px;
+                line-height: 14px;
+                color: lighten(@cello, 60%);
+                margin-top: 10px;
+            }
+        }
+    }
+}

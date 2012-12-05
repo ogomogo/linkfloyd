@@ -1,0 +1,6 @@
+{% load qhonuskan_votes %}
+<div class="btn-group btn-group-vertical" x:model="{{vote_model}}" x:id="{{object.id}}">
+    <button class="btn icon-arrow-up{% if object|is_up_voted_by:user %} voted{%endif%}" x:value="1" ></button>
+    <button class="btn disabled">{% if object.vote_score %}{{object.vote_score}}{% else %}0{% endif %}</button>
+    <button class="btn icon-arrow-down{% if object|is_down_voted_by:user %} voted{%endif%}" x:value="-1"></button>
+</div>
