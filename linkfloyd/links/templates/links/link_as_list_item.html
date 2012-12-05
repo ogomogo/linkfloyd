@@ -10,27 +10,24 @@
         {%if link.url %}
             {% include "links/attachment.html" %}
         {% endif %}
-        <ul class="flat-list actions">
-            <li><a href="{{link.get_absolute_url}}">{% trans "Comments" %} ({{link.comment_score}})</a></li>
+
+        <div class="actions">
+            <a href="{{link.get_absolute_url}}">{% trans "Comments" %} ({{link.comment_score}})</a>
             {% if link.posted_by == user or user.is_staff %}
-                <li><a href="{% url update_link link.id %}">{% trans "Update" %}</a></li>
-                <li><a href="#" class="deleteLink">{% trans "Delete" %}</a></li>
+                <a href="{% url update_link link.id %}">{% trans "Update" %}</a>
+                <a href="#" class="deleteLink">{% trans "Delete" %}</a>
             {% endif %}
             {% if user.is_authenticated %}
-            <li>
                 {% with link_subscription_status=user|link_subscription_status:link %}
                     {% if link_subscription_status %}
-                        <a class="switchFollowLink" title="Do not send emails about that link anymore" href="#">{% trans "Unsubscribe" %}</a></li>
+                        <a class="switchFollowLink" title="Do not send emails about that link anymore" href="#">{% trans "Unsubscribe" %}</a>
                     {% else %}
-                        <a class="switchFollowLink" title="Email me when somebody comments on that link" href="#">{% trans "Subscribe" %}</a></li>
+                        <a class="switchFollowLink" title="Email me when somebody comments on that link" href="#">{% trans "Subscribe" %}</a>
                     {% endif %}
                 {% endwith %}
-            </li>
             {% endif %}
-            <li>
             <a href="http://www.addthis.com/bookmark.php" class="addthis_button" addthis:url="{{link.get_full_url}}" addthis:title="{{link.channel}}: {{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %}>{% trans "Share" %}</a>
-            </li>
-        </ul>
+        </div>
     </div>
         {% if expanded_comments %}
             <div class="comments">
