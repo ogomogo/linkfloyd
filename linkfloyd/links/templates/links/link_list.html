@@ -30,17 +30,43 @@
 
 {% block content %}
 <div class="row-fluid">
-    <div class="span3 hidden-phone">
+    <div class="span9 section">
+        <h4 class="nomargin">{{title}}</h4>
+        <ul class="nav nav-tabs">
+            <li {% if ordering == 'controversial' %}class="active"{% endif %}>
+                <a href="?ordering=controversial">{% trans "Controversial" %}</a>
+            </li>
+            <li {% if ordering == 'top' %}class="active"{% endif %}>
+                <a href="?ordering=top">{% trans "Top Voted" %}</a>
+            </li>
+            <li {% if ordering == 'latest' %}class="active"{% endif %}>
+                <a href="?ordering=latest">{% trans "Latest" %}</a>
+            </li>
+            <li {% if ordering == 'hot' %}class="active"{% endif %}>
+                <a href="?">{% trans "Hot" %}</a>
+            </li>
+        </ul>
+        {% for link in links %}
+            {% include "links/link_as_list_item.html" %}
+        {% empty %}
+            <p class="warning">{% trans "No links found." %}</p>
+        {% endfor %}
+        {% with page_obj=links %}
+            {% include "pagination_links.html" %}
+        {% endwith %}
+    </div>
+    <div class="span3 hidden-phone pull-right">
         {% if links_from == 'channel' %}
             {% with channel=instance %}
                <div class="about section">
                    <h3>{{ channel.name }}</h3>
-                    <p class="channel_description">{{ channel.description }}</p>
+                   <p class="channel_description">{{ channel.description }}</p>
                 </div>
                 {% if channel.notes %}
-                <div class="section">
-                    <h3>{% trans "Notes & Rules" %}</h2>{{ channel.notes }}{% endif %}
-                </div>
+                    <div class="section">
+                        <h3>{% trans "Notes & Rules" %}</h2>{{ channel.notes }}
+                    </div>
+                {% endif %}
                 <div class="actions section">
                     <h2>{% trans "Actions" %}</h2>
                     <ul class="navigation">
@@ -50,10 +76,10 @@
                                 <li><a href="{% url update_channel channel.slug %}">{% trans "Update Channel" %}</a></li>
                             {% endif %}
                             <li>
-                            <a href="#" data-slug="{{channel.slug}}" class="subscription_status {% if subscription_status %} subscribed{% endif %}">{% if subscription_status %}{% trans "Unsubscribe" %}{% else %}{% trans "Subscribe" %}{% endif %}</a>
+                                <a href="#" data-slug="{{channel.slug}}" class="subscription_status {% if subscription_status %} subscribed{% endif %}">{% if subscription_status %}{% trans "Unsubscribe" %}{% else %}{% trans "Subscribe" %}{% endif %}</a>
                             </li>
                         {% endwith %}
-	    	        </ul>
+	               </ul>
                 </div>
             {% endwith %}
         {% endif %}
@@ -104,31 +130,6 @@
 			<p>{% trans "If you think something contributes to conversation, upvote it. If you think it does not contribute to the channel it is posted in or is off-topic in a particular community, downvote it."%}</p>
 		</div>
 	</div>
-    <div class="span9 section">
-        <h4 class="nomargin">{{title}}</h4>
-        <ul class="nav nav-tabs">
-            <li {% if ordering == 'controversial' %}class="active"{% endif %}>
-                <a href="?ordering=controversial">{% trans "Controversial" %}</a>
-            </li>
-            <li {% if ordering == 'top' %}class="active"{% endif %}>
-                <a href="?ordering=top">{% trans "Top Voted" %}</a>
-            </li>
-            <li {% if ordering == 'latest' %}class="active"{% endif %}>
-                <a href="?ordering=latest">{% trans "Latest" %}</a>
-            </li>
-            <li {% if ordering == 'hot' %}class="active"{% endif %}>
-                <a href="?">{% trans "Hot" %}</a>
-            </li>
-        </ul>
-        {% for link in links %}
-            {% include "links/link_as_list_item.html" %}
-        {% empty %}
-            <p class="warning">{% trans "No links found." %}</p>
-        {% endfor %}
-        {% with page_obj=links %}
-            {% include "pagination_links.html" %}
-        {% endwith %}
-    </div>
 </div>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=miratcan"></script>
 {% if highlight %}
