@@ -32,40 +32,12 @@
   </head>
   <body>
     <div class="navbar navbar-inverse">
-      <div class="navbar-inner">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="/">Linkfloyd</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Channels" %} <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{% url browse_channels %}">{% trans "Browse Channels" %}</a></li>
-                  <li><a href="{% url create_channel %}">{% trans "Create a Channel" %}</a></li>
-                </ul>
-              </li>
-              {% if user.is_authenticated %}
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="{{user.get_absolute_url}}">{% trans "Me" %} <b class="caret"></b> </a>
-                <ul class="dropdown-menu">
-                  <li><a href="{% url update_preferences %}">{% trans "Preferences" %}</a></li>
-                  <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-                </ul>
-              </li>
-              {% endif %}
-            </ul>
-          </div><!--/.nav-collapse -->
-      </div>
+
     </div>
+
     <div class="container-fluid wrapper">
         {% block content %}{% endblock %}
     </div>
-
 
     <!-- Le javascript
     ================================================== -->
